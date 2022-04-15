@@ -73,7 +73,7 @@ export class AppComponent implements OnInit{
     );
   }
 
-  public onDeleteEmloyee(employeeId: number): void {
+  public onDeleteEmployee(employeeId: number): void {
     this.employeeService.deleteEmployee(employeeId).subscribe(
       (response: void) => {
         console.log(response);
@@ -102,29 +102,25 @@ export class AppComponent implements OnInit{
     }
   }
 
-  public onOpenModal(employee: Employee, mode: string): void{
-
+  public onOpenModal(employee: Employee, mode: string): void {
     const container = document.getElementById('main-container');
-
     const button = document.createElement('button');
-
     button.type = 'button';
     button.style.display = 'none';
     button.setAttribute('data-toggle', 'modal');
-    if(mode === 'add'){
+    if (mode === 'add') {
       button.setAttribute('data-target', '#addEmployeeModal');
     }
-    if(mode === 'edit'){
+    if (mode === 'edit') {
+      this.editEmployee = employee;
       button.setAttribute('data-target', '#updateEmployeeModal');
     }
-    if(mode === 'delete'){
+    if (mode === 'delete') {
+      this.deleteEmployee = employee;
       button.setAttribute('data-target', '#deleteEmployeeModal');
     }
-
-    container?.appendChild(button);
-
+    container.appendChild(button);
     button.click();
-
   }
 
 }
